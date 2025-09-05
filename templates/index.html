@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt-to-JSON Enhancer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-top">
+                <h1 class="title">
+                    <span class="title-icon">⚡</span>
+                    Prompt-to-JSON Enhancer
+                </h1>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+            <p class="subtitle">Transform your prompts into structured JSON with intelligent rule-based logic</p>
+        </header>
+
+        <main class="main">
+            <div class="input-section">
+                <div class="input-container">
+                    <label for="prompt-input" class="input-label">Enter your prompt:</label>
+                    <textarea 
+                        id="prompt-input" 
+                        class="prompt-input" 
+                        placeholder="e.g., Write a Python function to scrape a website and save results to CSV..."
+                        rows="4"
+                    ></textarea>
+                    <div class="transform-controls">
+                        <button id="transform-btn" class="transform-btn">
+                            <span class="btn-text">Transform to JSON</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-section" id="output-section" style="display: none;">
+                <div class="output-container">
+                    <div class="output-header">
+                        <h3 class="output-title">Generated JSON</h3>
+                        <div class="output-actions">
+                            <button id="copy-btn" class="copy-btn" title="Copy JSON">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                            <button id="download-btn" class="download-btn" title="Download JSON">
+                                <span class="download-icon">💾</span>
+                                <span class="download-text">Download</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="json-container">
+                        <pre id="json-output" class="json-output"><code class="language-json"></code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Transforming your prompt...</p>
+            </div>
+
+            <div class="error" id="error" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <p class="error-text" id="error-text"></p>
+            </div>
+        </main>
+
+        <!-- Floating Action Button for Settings -->
+        <div class="fab-container">
+            <button id="fab-settings" class="fab-settings" title="Customization Options">
+                <span class="fab-icon">⚙️</span>
+            </button>
+        </div>
+
+        <!-- Floating Settings Panel -->
+        <div id="floating-panel" class="floating-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Customization</h3>
+                <button id="panel-close" class="panel-close">
+                    <span class="close-icon">✕</span>
+                </button>
+            </div>
+            <div class="panel-content">
+                <div class="setting-group">
+                    <label class="setting-label">Output Style</label>
+                    <div class="style-toggle">
+                        <button class="style-btn active" data-style="detailed">Detailed</button>
+                        <button class="style-btn" data-style="short">Short</button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">Include Keys</label>
+                    <div class="keys-grid">
+                        <label class="key-item">
+                            <input type="checkbox" name="include-keys" value="context" checked>
+                            <span class="key-label">Context</span>
+                        </label>
+                        <label class="key-item">
+                            <input type="checkbox" name="include-keys" value="problem" checked>
+                            <span class="key-label">Problem</span>
+                        </label>
+                        <label class="key-item">
+                            <input type="checkbox" name="include-keys" value="expected_solution" checked>
+                            <span class="key-label">Expected Solution</span>
+                        </label>
+                        <label class="key-item">
+                            <input type="checkbox" name="include-keys" value="output_format" checked>
+                            <span class="key-label">Output Format</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Overlay -->
+        <div id="panel-overlay" class="panel-overlay"></div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span class="toast-text">Copied to clipboard!</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
