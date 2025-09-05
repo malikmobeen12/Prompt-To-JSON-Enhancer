@@ -68,12 +68,6 @@ docker build -t prompt-to-json-enhancer .
 docker run -p 5000:5000 prompt-to-json-enhancer
 ```
 
-## 🧪 Testing
-
-```bash
-python test_app.py
-```
-
 ## 📝 Example
 
 **Input:**
